@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Plastic Nite jobs</title>
+  <meta charset="utf-8">
+  <meta name="Description" content="Sample description here.">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/ear-xs.png">
+  <link rel="shortcut icon" href="/ear-xs.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#01256e">
+  <style>
+    html {
+      height: 100%;
+    }
+
+    body {
+      background-color: #7b4fa8;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page {
+      flex-grow: 1;
+      padding: 20px 20px 0 20px;
+      background-color: #fefce6;
+      /* background-color: #a5bd9f; */
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+    }
+
+    #preload {
+      position: fixed;
+      opacity: 1;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      -webkit-transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 436ms;
+      -moz-transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 436ms;
+      transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 436ms;
+    }
+
+    .fade {
+      opacity: 0 !important;
+    }
+
+    .fadeIn {
+      opacity: 1 !important;
+    }
+
+    #app {
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      -webkit-transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 436ms;
+      -moz-transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 436ms;
+      transition: opacity cubic-bezier(0.4, 0, 0.2, 1) 436ms;
+    }
+
+    #crest {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .mdl-progress {
+      display: block;
+      position: relative;
+      height: 4px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .mdl-progress>.bar {
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 0%;
+      transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mdl-progress>.progressbar {
+      background-color: #01256e;
+      z-index: 1;
+      left: 0;
+    }
+
+    .mdl-progress>.bufferbar {
+      background-image: linear-gradient( to right,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7)),
+      linear-gradient(to right, #01256e, #01256e);
+      z-index: 0;
+      left: 0;
+    }
+
+    .mdl-progress>.auxbar {
+      right: 0;
+    }
+
+    /* Webkit only */
+
+    @supports (-webkit-appearance: none) {
+      .mdl-progress:not(.mdl-progress--indeterminate):not(.mdl-progress--indeterminate)>.auxbar,
+      .mdl-progress:not(.mdl-progress__indeterminate):not(.mdl-progress__indeterminate)>.auxbar {
+        background-image: linear-gradient(to right, #01256e, #01256e),
+        linear-gradient(to right, #01256e, #01256e);
+      }
+    }
+
+    .mdl-progress:not(.mdl-progress--indeterminate)>.auxbar,
+    .mdl-progress:not(.mdl-progress__indeterminate)>.auxbar {
+      background-image: linear-gradient(to right, #01256e, #01256e),
+      linear-gradient(to right, #01256e, #01256e);
+    }
+
+    .mdl-progress.mdl-progress--indeterminate>.bar1,
+    .mdl-progress.mdl-progress__indeterminate>.bar1 {
+      background-color: #01256e;
+      animation-name: indeterminate1;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    .mdl-progress.mdl-progress--indeterminate>.bar3,
+    .mdl-progress.mdl-progress__indeterminate>.bar3 {
+      background-image: none;
+      background-color: #01256e;
+      animation-name: indeterminate2;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    @keyframes indeterminate1 {
+      0% {
+        left: 0%;
+        width: 0%;
+      }
+      50% {
+        left: 25%;
+        width: 75%;
+      }
+      75% {
+        left: 100%;
+        width: 0%;
+      }
+    }
+
+    @keyframes indeterminate2 {
+      0% {
+        left: 0%;
+        width: 0%;
+      }
+      50% {
+        left: 0%;
+        width: 0%;
+      }
+      75% {
+        left: 0%;
+        width: 25%;
+      }
+      100% {
+        left: 100%;
+        width: 0%;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" lazyload>
+  <div id="preload">
+    <img id="crest" decoding="async" alt="Nite Plastic brand image" src="/ear.png" />
+    <div class="mdl-progress mdl-js-progress mdl-progress--indeterminate">
+      <div class="progressbar bar bar1"></div>
+      <div class="bufferbar bar bar2"></div>
+      <div class="auxbar bar bar3"></div>
+    </div>
+  </div>
+  <div id="app"></div>
+</body>
+
+</html>

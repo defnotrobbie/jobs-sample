@@ -1,0 +1,18 @@
+{
+  "short_name": "CHC Jobs",
+  "name": "CHC Student Jobs",
+  "background_color": "#01256e",
+  "theme_color": "#01256e",
+  "description": "Apply to student jobs with College House Computing",
+
+  "icons": [
+    {
+      "src": "chc_crest.png",
+      "type": "image/png",
+      "sizes": "162x162"
+    }
+  ],
+  "lang": "en-US",
+  "display": "fullscreen",
+  "start_url": "/?utm_source=homescreen"
+}
