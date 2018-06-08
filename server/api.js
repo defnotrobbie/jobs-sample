@@ -48,6 +48,8 @@ const ensureAuth = (req, res, next) => {
   else return res.sendStatus(401);
   // else res.redirect("/");
 };
+
+// if (process.env.LOCAL)
 router.use(ensureAuth);
 
 router.get("/text", (req, res) => {

@@ -29,7 +29,6 @@ class AsyncFileInput extends React.Component {
   handleFileChange = handler => ({ target: { files } }) => {
     const formData = new FormData();
     formData.append("resume", files[0]);
-    // this.props.upload(this.props.id, formData);
     this.setState({ submitting: true });
     fetch(`/api/application/${this.props.id}/resume`, {
       method: "post",
@@ -60,7 +59,6 @@ class AsyncFileInput extends React.Component {
       })
       .then(json => {
         handler({
-          // file: files[0],
           originalName: files[0].name,
           name: json.file
         });
@@ -96,7 +94,7 @@ class AsyncFileInput extends React.Component {
         <FormLabel component="legend" style={{marginBottom:5}}>{props.label}</FormLabel>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Button
-            disabled={this.props.submitting || this.props.disabled }
+            disabled={this.props.submitting || this.props.disabled}
             variant="raised"
             component="label"
             color="primary"

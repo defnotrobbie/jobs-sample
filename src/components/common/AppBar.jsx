@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import Feedback from "material-ui-icons/Feedback";
 import HelpOutline from "material-ui-icons/HelpOutline";
 import IconButton from "material-ui/IconButton";
+import { connect } from "react-redux";
+
+import { login, logout } from "../../actions/profileActions";
 import { BRAND_IMG, BRAND } from "../../config";
 const HeaderAppBar = props => (
   <AppBar position="static" color="primary">
@@ -52,12 +55,14 @@ const HeaderAppBar = props => (
             </IconButton>
 
             {!props.isLoggedIn && (
-              <Button color="inherit" href="/login">
+              // <Button color="inherit" href="/login">
+              <Button color="inherit" onClick={props.login}>
                 Login
               </Button>
             )}
             {props.isLoggedIn && (
-              <Button color="inherit" href="/logout">
+              // <Button color="inherit" href="/logout">
+              <Button color="inherit" onClick={props.logout}>
                 {/* <Button color="inherit" href="https://weblogin.pennkey.upenn.edu/logout"> */}
                 Logout
               </Button>
@@ -72,5 +77,13 @@ const HeaderAppBar = props => (
 HeaderAppBar.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired
 };
+const mapDispatchToProps = dispatch => ({
+  login: () => dispatch(login()),
+  logout: () => dispatch(logout())
+});
 
-export default HeaderAppBar;
+// export default HeaderAppBar;
+export default connect(
+  null,
+  mapDispatchToProps
+)(HeaderAppBar);

@@ -6,13 +6,13 @@ import session from "express-session";
 import uuidv4 from "uuid/v4";
 // import helmet from "helmet";
 import compression from "compression";
-import passport from "passport";
+// import passport from "passport";
 // const saml = require("passport-saml").Strategy;
-import { Strategy as saml } from "passport-saml";
+// import { Strategy as saml } from "passport-saml";
 import bodyParser from "body-parser";
 import api from "./api";
 let authRoute;
-if (!process.env.LOCAL) authRoute = require("./authRoute");
+// if (!process.env.LOCAL) authRoute = require("./authRoute");
 // import authRoute from "./authRoute";
 import open from "open";
 import fs from "fs";
@@ -58,26 +58,34 @@ app.use(
 app.use(compression());
 if (process.env.LOCAL) {
   app.use((req, res, next) => {
-    if (req.session.loggedIn)
+    req.session.reqs++
+    if (req.session.loggedIn) {
       req.user = {
         id: "12345678",
         fname: "Zaphod",
         lname: "Beeblebrox",
         loggedIn: true
       };
-
+      req.isAuthenticated = () => true
+    } else {
+      req.isAuthenticated = () => false
+    }
     next();
-  });
-  app.get("/profile", (req, res) => {
-    res.json(req.user);
   });
   app.get("/login", (req, res) => {
     req.session.loggedIn = true;
-    res.redirect("/");
+    res.send({status:'logged in'})
   });
+  
+  app.get("/profile", (req, res) => {
+    if (req.session.loggedIn)
+    res.json(req.user);
+    else res.sendStatus(401)
+  });
+  
   app.get("/logout", (req, res) => {
     req.session.loggedIn = false;
-    res.redirect("/");
+    res.send({status:'logged out'})
   });
 } else app.use(authRoute);
 
@@ -91,7 +99,7 @@ app.get("/session", (req, res) => {
 });
 app.use(express.static("public"));
 if (process.env.NODE_ENV !== "development") app.use(express.static("build"));
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   if (process.env.NODE_ENV === "development" || process.env.LOCAL) {
     res.sendFile(path.join(__dirname, "../src/index.html"));
   } else {
@@ -99,7 +107,7 @@ app.get("*", function(req, res) {
   }
 });
 
-app.listen(port, function(err) {
+app.listen(port, function (err) {
   if (err) {
     console.log(err);
   } else {

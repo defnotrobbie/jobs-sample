@@ -6,4 +6,4 @@
 export const BRAND_IMG = "ear.png"
 export const BRAND = "Plastic Nite"
 export const WELCOME = "Welcome to the Plastic Nite jobs portal"
-export const HELP = "If you have questions or run into any problems using this application, please kindly go to hell."
+export const HELP = "If you have questions or run into any problems using this application, please RTFM."

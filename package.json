@@ -1,5 +1,5 @@
 {
-    "name": "chc-jobs-portal",
+    "name": "jobs-portal-sample",
     "version": "0.0.1",
     "description": "Portal and forms for student jobs with CHC",
     "main": "index.js",
@@ -9,9 +9,10 @@
         "start": "NODE_ENV=development npm-run-all --parallel server lint:watch",
         "start:server": "NODE_ENV=dev-server npm-run-all --parallel server:watch",
         "start:watch": "NODE_ENV=development npm-run-all --parallel server:watch",
+        "start:local": "NODE_ENV=development LOCAL=true npm-run-all --parallel lint:watch server:watch apiServer:watch",
         "start:windows": "set NODE_ENV=development&&npm-run-all --parallel server lint:watch",
         "start:windows:watch": "set NODE_ENV=development&&npm-run-all --parallel server:watch lint:watch",
-        "start:windows:local": "set NODE_ENV=development&&set LOCAL=true&&npm-run-all --parallel server:watch apiServer:watch",
+        "start:windows:local": "set NODE_ENV=development&&set LOCAL=true&&npm-run-all --parallel lint:watch server:watch apiServer:watch",
         "server": "babel-node server/server.js --mode development",
         "server:test": "NODE_ENV=test babel-node server/server.js --mode production",
         "server:watch": "nodemon server/server.js --exec babel-node",

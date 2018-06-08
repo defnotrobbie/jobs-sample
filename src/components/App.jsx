@@ -24,9 +24,9 @@ class App extends React.Component {
 
   componentWillMount() {
     this.props.getProfile();
-    fetch(`/api/text`, { credentials: "same-origin" })
-      .then(res => res.json())
-      .then(json => this.props.loadText(json));
+    // fetch(`/api/text`, { credentials: "same-origin" })
+    //   .then(res => res.json())
+    //   .then(json => this.props.loadText(json));
     const preload = document.getElementById("preload");
     const appDiv = document.getElementById("app");
     if (preload) {
